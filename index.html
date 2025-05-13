@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Operation App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        .input-field {
+            margin-bottom: 10px;
+        }
+        button {
+            margin-right: 10px;
+        }
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>String Operation App</h1>
+        <div class="input-field">
+            <label for="string1">Enter String 1:</label>
+            <input type="text" id="string1">
+        </div>
+        <div class="input-field">
+            <label for="string2">Enter String 2:</label>
+            <input type="text" id="string2">
+        </div>
+        <div class="input-field">
+            <label for="string3">Enter String 3:</label>
+            <input type="text" id="string3">
+        </div>
+        <button id="calculate">Calculate</button>
+        <button id="reset">Reset</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        let operationIndex = 0;
+
+        document.getElementById('calculate').addEventListener('click', function() {
+            const string1 = document.getElementById('string1').value;
+            const string2 = document.getElementById('string2').value;
+            const string3 = document.getElementById('string3').value;
+            let result = '';
+
+            switch (operationIndex) {
+                case 0:
+                    result = 'Lengths: ' + string1.length + ', ' + string2.length + ', ' + string3.length;
+                    break;
+                case 1:
+                    result = 'Slices: ' + string1.slice(0, 3) + ', ' + string2.slice(0, 3) + ', ' + string3.slice(0, 3);
+                    break;
+                case 2:
+                    result = 'Splits: ' + string1.split('').join(', ') + ' | ' + string2.split('').join(', ') + ' | ' + string3.split('').join(', ');
+                    break;
+                case 3:
+                    result = 'Substrings: ' + string1.substring(1, 4) + ', ' + string2.substring(1, 4) + ', ' + string3.substring(1, 4);
+                    break;
+                case 4:
+                    result = 'Replacements: ' + string1.replace(/a/g, 'o') + ', ' + string2.replace(/a/g, 'o') + ', ' + string3.replace(/a/g, 'o');
+                    break;
+                default:
+                    result = 'All operations completed.';
+                    break;
+            }
+
+            document.getElementById('output').innerText = 'Result: ' + result;
+            operationIndex = (operationIndex + 1) % 5;
+        });
+
+        document.getElementById('reset').addEventListener('click', function() {
+            document.getElementById('string1').value = '';
+            document.getElementById('string2').value = '';
+            document.getElementById('string3').value = '';
+            document.getElementById('output').innerText = '';
+            operationIndex = 0;
+        });
+    </script>
+</body>
+</html>
